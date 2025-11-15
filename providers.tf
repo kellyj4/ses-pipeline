@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket      = "jxk-sandbox-tfstate-aps2"
+    bucket      = "jxk-sandbox-tfstate-apes2"
     dynamodb_table = "jxk-sandbox-tfstate-apse2"
     encrypt = true
     key = "ses/terraform.tfstate"
