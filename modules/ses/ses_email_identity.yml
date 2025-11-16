@@ -103,7 +103,6 @@ Resources:
     Type: AWS::SES::MailManagerIngressPoint
     Properties:
       IngressPointConfiguration:
-        SecretArn: "arn:aws:secretsmanager:ap-southeast-2:123456789012:secrets/smtp-credentials-abc123"
         SmtpPassword: "Qwerty1234567890!!!"
       IngressPointName: IngressPoint1
       NetworkConfiguration:
