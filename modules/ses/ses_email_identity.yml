@@ -103,6 +103,9 @@ Resources:
     Type: AWS::SES::MailManagerIngressPoint
     Properties:
       IngressPointName: IngressPoint1
+      NetworkConfiguration:
+        PrivateNetworkConfiguration:
+          VpcEndpointId: !GetAtt SESVPCEndpointMailManagerIngressEndpoint.Id
       RuleSetId: !GetAtt SESMailManagerRuleSet.RuleSetId
       Tags:
         - Key: "environment"
