@@ -122,7 +122,7 @@ Resources:
     Properties:
        Name: ConfigSet1
        DeliveryOptions:
-         SendingPoolName: Default
+         SendingPoolName: default
          TlsPolicy: REQUIRE
 
   SESMailReceiptRuleSet:
