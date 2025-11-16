@@ -8,9 +8,9 @@ Parameters:
   MailFromDomainName:
     Type: String
     Description: "This needs to be a subdomain of !Ref DomainName"
-  Route53ZoneId:
-    Type: String
-    Description: "The Hosted Zone ID for your domain in Route 53."
+#  Route53ZoneId:
+#    Type: String
+#    Description: "The Hosted Zone ID for your domain in Route 53."
 
 Resources:
   # Create the SES Domain Identity
