@@ -21,7 +21,7 @@ Parameters:
 Resources:
   # Create the SES Domain Identity
   # This resource verifies domain ownership and automatically generates the DKIM tokens.
-  SESVPCEndpoint-EmailHTTPS:
+  SESVPCEndpointEmailHTTPS:
     Type: AWS::EC2::VPCEndpoint
     Properties:
       VpcId: !Ref ExistingVPCID
@@ -29,7 +29,7 @@ Resources:
       VpcEndpointType: Interface
       SubnetIds: !Ref ExistingVPCSubnetIDs
       
-  SESVPCEndpoint-Email-dot-aws:
+  SESVPCEndpointEmaildotaws:
     Type: AWS::EC2::VPCEndpoint
     Properties:
       VpcId: !Ref ExistingVPCID
@@ -37,7 +37,7 @@ Resources:
       VpcEndpointType: Interface
       SubnetIds: !Ref ExistingVPCSubnetIDs
 
-  SESVPCEndpoint-EmailSMTP:
+  SESVPCEndpointEmailSMTP:
     Type: AWS::EC2::VPCEndpoint
     Properties:
       VpcId: !Ref ExistingVPCID
@@ -45,7 +45,7 @@ Resources:
       VpcEndpointType: Interface
       SubnetIds: !Ref ExistingVPCSubnetIDs
 
-  SESVPCEndpoint-EmailSMTP-dot-aws:
+  SESVPCEndpointEmailSMTPdotaws:
     Type: AWS::EC2::VPCEndpoint
     Properties:
       VpcId: !Ref ExistingVPCID
