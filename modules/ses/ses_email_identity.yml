@@ -46,7 +46,7 @@ Resources:
     Type: AWS::EC2::VPCEndpoint
     Properties:
       VpcId: !Ref ExistingVPCID
-      ServiceName: !Sub "com.amazonaws.${AWS::Region}.feedback-smtp"
+      ServiceName: !Sub "com.amazonses.${AWS::Region}.feedback-smtp"
       VpcEndpointType: Interface
       SubnetIds: !Ref ExistingVPCSubnetIDs
         
