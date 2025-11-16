@@ -17,6 +17,7 @@ variable "mailfromdomain" {
 variable "vpc_id" {
     description = "ID of the existing VPC where SES resources will be created"
     type = string
+    default = ""
 }
 
 variable "vpc_subnet_ids" {
