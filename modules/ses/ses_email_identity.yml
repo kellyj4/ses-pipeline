@@ -42,13 +42,13 @@ Resources:
       VpcEndpointType: Interface
       SubnetIds: !Ref ExistingVPCSubnetIDs
 
-  SESVPCEndpointEmailCustomMailFromFeedback:
-    Type: AWS::EC2::VPCEndpoint
-    Properties:
-      VpcId: !Ref ExistingVPCID
-      ServiceName: !Sub "com.amazonses.${AWS::Region}.feedback-smtp"
-      VpcEndpointType: Interface
-      SubnetIds: !Ref ExistingVPCSubnetIDs
+#  SESVPCEndpointEmailCustomMailFromFeedback:
+#    Type: AWS::EC2::VPCEndpoint
+#    Properties:
+#      VpcId: !Ref ExistingVPCID
+#      ServiceName: !Sub "com.amazonses.${AWS::Region}.feedback-smtp"
+#      VpcEndpointType: Interface
+#      SubnetIds: !Ref ExistingVPCSubnetIDs
         
   SESDomainIdentity:
     Type: AWS::SES::EmailIdentity
