@@ -103,7 +103,7 @@ Resources:
     Type: AWS::SES::MailManagerIngressPoint
     Properties:
       IngressPointName: IngressPoint1
-      RuleSetId: !GetAtt SESMailManagerRuleSet.Id
+      RuleSetId: !GetAtt SESMailManagerRuleSet.RuleSetId
       StatusToUpdate: CLOSED
       Tags:
         - Key: "environment"
