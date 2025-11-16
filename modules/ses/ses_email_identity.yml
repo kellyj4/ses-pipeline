@@ -8,6 +8,12 @@ Parameters:
   MailFromDomainName:
     Type: String
     Description: "This needs to be a subdomain of !Ref DomainName"
+  ExistingVPCID:
+    Type: String
+    Description: "The ID of an existing VPC where SES resources can be created" 
+  ExistingVPCSubnetIDs:
+    Type: CommaDelimitedList
+    Description: "A list of existing Subnet IDs within the VPC."
 #  Route53ZoneId:
 #    Type: String
 #    Description: "The Hosted Zone ID for your domain in Route 53."
@@ -15,6 +21,38 @@ Parameters:
 Resources:
   # Create the SES Domain Identity
   # This resource verifies domain ownership and automatically generates the DKIM tokens.
+  SESVPCEndpoint-EmailHTTPS:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      VpcId: !Ref ExistingVPCID
+      ServiceName: !Sub "com.amazonaws.${AWS::Region}.email"
+      VpcEndpointType: Interface
+      SubnetIds: !Ref ExistingVPCSubnetIDs
+      
+  SESVPCEndpoint-Email-dot-aws:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      VpcId: !Ref ExistingVPCID
+      ServiceName: !Sub "aws.api.${AWS::Region}.email"
+      VpcEndpointType: Interface
+      SubnetIds: !Ref ExistingVPCSubnetIDs
+
+  SESVPCEndpoint-EmailSMTP:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      VpcId: !Ref ExistingVPCID
+      ServiceName: !Sub "com.amazonaws.${AWS::Region}.email-smtp"
+      VpcEndpointType: Interface
+      SubnetIds: !Ref ExistingVPCSubnetIDs
+
+  SESVPCEndpoint-EmailSMTP-dot-aws:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      VpcId: !Ref ExistingVPCID
+      ServiceName: !Sub "aws.api.${AWS::Region}.email-smtp"
+      VpcEndpointType: Interface
+      SubnetIds: !Ref ExistingVPCSubnetIDs
+        
   SESDomainIdentity:
     Type: AWS::SES::EmailIdentity
     Properties:
