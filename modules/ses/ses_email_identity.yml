@@ -30,7 +30,7 @@ Resources:
     Type: AWS::EC2::VPCEndpoint
     Properties:
       VpcId: !Ref ExistingVPCID
-      ServiceName: !Sub "com.amazonaws.${AWS::Region}.mail-manager-smtp-auth"
+      ServiceName: !Sub "com.amazonaws.${AWS::Region}.mail-manager-smtp.auth"
       VpcEndpointType: Interface
       SubnetIds: !Ref ExistingVPCSubnetIDs
 
@@ -102,18 +102,15 @@ Resources:
   SESMailManagerIngressPoint:
     Type: AWS::SES::MailManagerIngressPoint
     Properties:
-      IngressPointConfiguration: 
-        SecretArn: "arn:aws:secretsmanager:ap-southeast-2:123456789012:secret:MySecret-a1b2c3"
-        SmtpPassword: "MySmtpPassword"
       IngressPointName: IngressPoint1
-      RuleSetId: !Ref SESMailManagerRuleSet.Id
+      RuleSetId: !GetAtt SESMailManagerRuleSet.Id
       StatusToUpdate: CLOSED
       Tags:
         - Key: "environment"
           Value: "poc"
         - Key: "deployment"
           Value: "manual"
-      TrafficPolicyId: !Ref SESMailManagerTrafficPolicy.Id
+      TrafficPolicyId: !GetAtt SESMailManagerTrafficPolicy.Id
       Type: AUTH
 
   SESMailConfigurationSet:
