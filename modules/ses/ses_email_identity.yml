@@ -26,13 +26,13 @@ Resources:
       VpcEndpointType: Interface
       SubnetIds: !Ref ExistingVPCSubnetIDs
       
-#  SESVPCEndpointEmailSMTPInbound:
-#    Type: AWS::EC2::VPCEndpoint
-#    Properties:
-#      VpcId: !Ref ExistingVPCID
-#      ServiceName: !Sub "com.amazonaws.${AWS::Region}.inbound-smtp"
-#      VpcEndpointType: Interface
-#      SubnetIds: !Ref ExistingVPCSubnetIDs
+  SESVPCEndpointMailManagerIngressEndpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      VpcId: !Ref ExistingVPCID
+      ServiceName: !Sub "com.amazonaws.${AWS::Region}.mail-manager-smtp-auth"
+      VpcEndpointType: Interface
+      SubnetIds: !Ref ExistingVPCSubnetIDs
 
   SESVPCEndpointEmailSMTPOutbound:
     Type: AWS::EC2::VPCEndpoint
@@ -98,6 +98,23 @@ Resources:
       ArchiveName: !Join ['-', ['sentEmail', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref AWS::StackId]]]]]]
       Retention:
          RetentionPeriod: "THREE_MONTHS"
+
+  SESMailManagerIngressPoint:
+    Type: AWS::SES::MailManagerIngressPoint
+    Properties:
+      IngressPointConfiguration: 
+        SecretArn: "arn:aws:secretsmanager:ap-southeast-2:123456789012:secret:MySecret-a1b2c3"
+        SmtpPassword: "MySmtpPassword"
+      IngressPointName: IngressPoint1
+      RuleSetId: !Ref SESMailManagerRuleSet.Id
+      StatusToUpdate: CLOSED
+      Tags:
+        - Key: "environment"
+          Value: "poc"
+        - Key: "deployment"
+          Value: "manual"
+      TrafficPolicyId: !Ref SESMailManagerTrafficPolicy.Id
+      Type: AUTH
 
   SESMailConfigurationSet:
     Type: AWS::SES::ConfigurationSet
