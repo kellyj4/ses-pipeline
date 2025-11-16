@@ -124,7 +124,6 @@ Resources:
     Properties:
       ConfigurationSetName: !GetAtt SESMailConfigurationSet.Name
       EventDestination:
-         Name: "SNSDestination"
          Enabled: true
          MatchingEventTypes:
            - SEND
