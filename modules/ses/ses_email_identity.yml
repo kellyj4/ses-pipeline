@@ -26,13 +26,13 @@ Resources:
       VpcEndpointType: Interface
       SubnetIds: !Ref ExistingVPCSubnetIDs
       
-  SESVPCEndpointEmailSMTPInbound:
-    Type: AWS::EC2::VPCEndpoint
-    Properties:
-      VpcId: !Ref ExistingVPCID
-      ServiceName: !Sub "com.amazonaws.${AWS::Region}.inbound-smtp"
-      VpcEndpointType: Interface
-      SubnetIds: !Ref ExistingVPCSubnetIDs
+#  SESVPCEndpointEmailSMTPInbound:
+#    Type: AWS::EC2::VPCEndpoint
+#    Properties:
+#      VpcId: !Ref ExistingVPCID
+#      ServiceName: !Sub "com.amazonaws.${AWS::Region}.inbound-smtp"
+#      VpcEndpointType: Interface
+#      SubnetIds: !Ref ExistingVPCSubnetIDs
 
   SESVPCEndpointEmailSMTPOutbound:
     Type: AWS::EC2::VPCEndpoint
