@@ -3,8 +3,8 @@
 Setup SES domain - Done
 Enable SES endpoint - Done
 Enable SES API v2, SMTP -  Done
-SNS, SQS for deliveries, bounces, complaints, opens, clicks and rejections
-Demo SES template
+SNS for deliveries, bounces, complaints, opens, clicks and rejections - Done
+Demo SES template - Done
 IAM roles for sending mail - Simple example
 Mailbox simulation when complete.
 
