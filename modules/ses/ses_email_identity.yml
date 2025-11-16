@@ -110,7 +110,7 @@ Resources:
           Value: "poc"
         - Key: "deployment"
           Value: "manual"
-      TrafficPolicyId: !GetAtt SESMailManagerTrafficPolicy.Id
+      TrafficPolicyId: !GetAtt SESMailManagerTrafficPolicy.TrafficPolicyId
       Type: AUTH
 
   SESMailConfigurationSet:
