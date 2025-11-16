@@ -4,5 +4,6 @@ module "ses_email_identity" {
    mailfromdomain = var.mailfromdomain
    vpc_id = var.vpc_id
    vpc_subnet_ids = var.vpc_subnet_ids
+   sns_topic_arn = var.sns_topic_arn
 }
 

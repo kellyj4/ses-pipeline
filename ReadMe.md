@@ -9,3 +9,6 @@ IAM roles for sending mail - Simple example
 Mailbox simulation when complete.
 
 Work out a suitable SPF DNS record value for RUA and RUF
+
+
+SNS-SES-topic-sandbox
