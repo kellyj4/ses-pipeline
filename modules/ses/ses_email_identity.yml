@@ -122,7 +122,7 @@ Resources:
   SESConfigurationSetEventDestination:
     Type: AWS::SES::ConfigurationSetEventDestination
     Properties:
-      ConfigurationSetName: !GetAtt SESMailConfigurationSet.Name
+      ConfigurationSetName: !Ref SESMailConfigurationSet
       EventDestination:
          Enabled: true
          MatchingEventTypes:
@@ -134,6 +134,7 @@ Resources:
            - OPEN
            - CLICK
            - RENDERING_FAILURE
+         Name: "SNSDestination"
          SnsDestination:
            TopicARN: !Ref ExistingSNSTopicARN
 
