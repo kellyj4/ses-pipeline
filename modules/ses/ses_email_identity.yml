@@ -147,7 +147,7 @@ Resources:
     Type: AWS::SES::Template
     Properties:
       Template:
-        TemplateName: "DefaultSESTemplate"
+        TemplateName: "TestSESTemplate"
         SubjectPart: "TEST - Please ignore"
         TextPart: "Hello Test Subject,\n\nPlease be aware this is a test email only."
         HtmlPart: "<h1>Hello Test Subject</h1><p>Please be aware this is a test email only</p>"
