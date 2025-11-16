@@ -135,7 +135,7 @@ Resources:
            - OPEN
            - CLICK
            - RENDERING_FAILURE
-         SNSDestination:
+         SnsDestination:
            TopicArn: !Ref ExistingSNSTopicARN
 
   SESMailReceiptRuleSet:
