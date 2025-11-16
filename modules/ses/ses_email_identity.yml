@@ -121,6 +121,9 @@ Resources:
     Type: AWS::SES::ConfigurationSet
     Properties:
        Name: ConfigSet1
+       DeliveryOptions:
+         SendingPoolName: Default
+         TlsPolicy: REQUIRE
 
   SESMailReceiptRuleSet:
      Type: AWS::SES::ReceiptRuleSet
