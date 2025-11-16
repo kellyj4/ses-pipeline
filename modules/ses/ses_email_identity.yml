@@ -135,8 +135,8 @@ Resources:
            - OPEN
            - CLICK
            - RENDERING_FAILURE
-      SNSDestination:
-         TopicArn: !Ref ExistingSNSTopicARN
+         SNSDestination:
+           TopicArn: !Ref ExistingSNSTopicARN
 
   SESMailReceiptRuleSet:
      Type: AWS::SES::ReceiptRuleSet
