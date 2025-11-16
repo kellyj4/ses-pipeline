@@ -119,11 +119,11 @@ Resources:
        DeliveryOptions:
          TlsPolicy: REQUIRE
 
-   SESConfigurationSetEventDestination:
-     Type: AWS::SES::ConfigurationSetEventDestination
-     Properties:
-       ConfigurationSetName: !GetAtt SESMailConfigurationSet.Name
-       EventDestination:
+  SESConfigurationSetEventDestination:
+    Type: AWS::SES::ConfigurationSetEventDestination
+    Properties:
+      ConfigurationSetName: !GetAtt SESMailConfigurationSet.Name
+      EventDestination:
          Name: SNSDestination
          Enabled: true
          MatchingEventTypes:
@@ -135,8 +135,8 @@ Resources:
            - OPEN
            - CLICK
            - RENDERING_FAILURE
-         SNSDestination:
-           TopicArn: !Ref ExistingSNSTopicARN
+      SNSDestination:
+         TopicArn: !Ref ExistingSNSTopicARN
 
   SESMailReceiptRuleSet:
      Type: AWS::SES::ReceiptRuleSet
