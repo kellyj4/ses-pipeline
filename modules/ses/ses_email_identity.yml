@@ -29,13 +29,13 @@ Resources:
       VpcEndpointType: Interface
       SubnetIds: !Ref ExistingVPCSubnetIDs
       
-  SESVPCEndpointEmaildotaws:
-    Type: AWS::EC2::VPCEndpoint
-    Properties:
-      VpcId: !Ref ExistingVPCID
-      ServiceName: !Sub "aws.api.${AWS::Region}.email"
-      VpcEndpointType: Interface
-      SubnetIds: !Ref ExistingVPCSubnetIDs
+#  SESVPCEndpointEmaildotaws:
+#    Type: AWS::EC2::VPCEndpoint
+#    Properties:
+#      VpcId: !Ref ExistingVPCID
+#      ServiceName: !Sub "aws.api.${AWS::Region}.email"
+#      VpcEndpointType: Interface
+#      SubnetIds: !Ref ExistingVPCSubnetIDs
 
   SESVPCEndpointEmailSMTP:
     Type: AWS::EC2::VPCEndpoint
@@ -45,13 +45,13 @@ Resources:
       VpcEndpointType: Interface
       SubnetIds: !Ref ExistingVPCSubnetIDs
 
-  SESVPCEndpointEmailSMTPdotaws:
-    Type: AWS::EC2::VPCEndpoint
-    Properties:
-      VpcId: !Ref ExistingVPCID
-      ServiceName: !Sub "aws.api.${AWS::Region}.email-smtp"
-      VpcEndpointType: Interface
-      SubnetIds: !Ref ExistingVPCSubnetIDs
+#  SESVPCEndpointEmailSMTPdotaws:
+#    Type: AWS::EC2::VPCEndpoint
+#    Properties:
+#      VpcId: !Ref ExistingVPCID
+#      ServiceName: !Sub "aws.api.${AWS::Region}.email-smtp"
+#      VpcEndpointType: Interface
+#      SubnetIds: !Ref ExistingVPCSubnetIDs
         
   SESDomainIdentity:
     Type: AWS::SES::EmailIdentity
