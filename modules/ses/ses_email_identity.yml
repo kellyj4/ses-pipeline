@@ -75,40 +75,40 @@ Resources:
        RuleSetName: default-rule-set
 
 
-  # DNS CNAME records for DKIM
-  # This resource creates three CNAME records using the DKIM tokens.
-  SESDKIMRecords:
-    Type: AWS::Route53::RecordSetGroup
-    Properties:
-      HostedZoneId: !Ref Route53ZoneId
-      RecordSets:
-        - Name: !GetAtt SESDomainIdentity.DkimDNSTokenName1
-          Type: CNAME
-          TTL: "60"
-          ResourceRecords:
-            - !GetAtt SESDomainIdentity.DkimDNSTokenValue1
-        - Name: !GetAtt SESDomainIdentity.DkimDNSTokenName2
-          Type: CNAME
-          TTL: "60"
-          ResourceRecords:
-            - !GetAtt SESDomainIdentity.DkimDNSTokenValue2
-        - Name: !GetAtt SESDomainIdentity.DkimDNSTokenName3
-          Type: CNAME
-          TTL: "60"
-          ResourceRecords:
-            - !GetAtt SESDomainIdentity.DkimDNSTokenValue3
-        - Name: !Sub "_dmarc.${DomainName}"
-          Type: TXT
-          TTL: "60"
-          ResourceRecords:
-             - '"v=DMARC1; p=none;"'
-        - Name: !Sub "${MailFromDomainName}"
-          Type: TXT
-          TTL: "60"
-          ResourceRecords:
-             - '"v=spf1 include:amazonses.com ~all"'
-        - Name: !Sub "${MailFromDomainName}"
-          Type: MX
-          TTL: "60"
-          ResourceRecords:
-             - "10 feedback-smtp.ap-southeast-2.amazonses.com"
+#  # DNS CNAME records for DKIM
+#  # This resource creates three CNAME records using the DKIM tokens.
+#  SESDKIMRecords:
+#    Type: AWS::Route53::RecordSetGroup
+#    Properties:
+#      HostedZoneId: !Ref Route53ZoneId
+#      RecordSets:
+#        - Name: !GetAtt SESDomainIdentity.DkimDNSTokenName1
+#          Type: CNAME
+#          TTL: "60"
+#          ResourceRecords:
+#            - !GetAtt SESDomainIdentity.DkimDNSTokenValue1
+#        - Name: !GetAtt SESDomainIdentity.DkimDNSTokenName2
+#          Type: CNAME
+#          TTL: "60"
+#          ResourceRecords:
+#            - !GetAtt SESDomainIdentity.DkimDNSTokenValue2
+#        - Name: !GetAtt SESDomainIdentity.DkimDNSTokenName3
+#          Type: CNAME
+#          TTL: "60"
+#          ResourceRecords:
+#            - !GetAtt SESDomainIdentity.DkimDNSTokenValue3
+#        - Name: !Sub "_dmarc.${DomainName}"
+#          Type: TXT
+#          TTL: "60"
+#          ResourceRecords:
+#             - '"v=DMARC1; p=none;"'
+#        - Name: !Sub "${MailFromDomainName}"
+#          Type: TXT
+#          TTL: "60"
+#          ResourceRecords:
+#             - '"v=spf1 include:amazonses.com ~all"'
+#        - Name: !Sub "${MailFromDomainName}"
+#          Type: MX
+#          TTL: "60"
+#          ResourceRecords:
+#             - "10 feedback-smtp.ap-southeast-2.amazonses.com"
