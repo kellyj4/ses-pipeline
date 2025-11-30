@@ -14,9 +14,6 @@ Parameters:
   ExistingVPCSubnetIDs:
     Type: CommaDelimitedList
     Description: "A list of existing Subnet IDs within the VPC."
-  ExistingSNSTopicARN:
-    Type: String
-    Description: "The ARN of an existing SNS Topic for SES Notifications."
 
 Resources:
   # Create the SES Domain Identity
@@ -119,24 +116,95 @@ Resources:
        DeliveryOptions:
          TlsPolicy: REQUIRE
 
-  SESConfigurationSetEventDestination:
+  SNSEncryptionKey:
+    Type: AWS::KMS::Key
+    Properties:
+      Description: KMS Key for encrypting the SES Event SNS Topic
+      KeyPolicy:
+        Version: '2012-10-17'
+        Id: key-default-1
+        Statement:
+          - Sid: Enable IAM User Permissions
+            Effect: Allow
+            Principal:
+              AWS: !Sub "arn:aws:iam::${AWS::AccountId}:root"
+            Action: "kms:*"
+            Resource: "*"
+  
+          - Sid: AllowSNSEncryption
+            Effect: Allow
+            Principal:
+              Service: "sns.amazonaws.com"
+            Action:
+              - kms:GenerateDataKey
+              - kms:Decrypt
+            Resource: "*"
+          
+          - Sid: AllowSESToUseKMSKey
+            Effect: Allow
+            Principal:
+              Service: "ses.amazonaws.com"
+            Action:
+              - kms:GenerateDataKey
+              - kms:Decrypt
+            Resource: "*"
+            Condition:
+              StringEquals:
+                "aws:SourceAccount": !Ref "AWS::AccountId"
+      
+      KeyUsage: ENCRYPT_DECRYPT
+      Tags:
+        - Key: Name
+          Value: "Yep-SES-Events-Key"
+        - Key: Service
+          Value: SNS-SES-Integration
+
+  SESEventsTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      DisplayName: "Yep-SES-Events"
+      TopicName: "Yep-SES-Events"
+      # Attach the KMS Key for Server-Side Encryption
+      KmsMasterKeyId: !GetAtt SNSEncryptionKey.Arn 
+
+  SESEventsTopicPolicy:
+    Type: AWS::SNS::TopicPolicy
+    Properties:
+      Topics:
+        - !Ref SESEventsTopic
+      PolicyDocument:
+        Version: '2012-10-17'
+        Id: SESPublishPolicy
+        Statement:
+          - Sid: AllowSESPublish
+            Effect: Allow
+            Principal:
+              Service: "ses.amazonaws.com"
+            Action: "sns:Publish"
+            Resource: !Ref SESEventsTopic
+            Condition:
+              StringEquals:
+                "aws:SourceAccount": !Ref "AWS::AccountId"
+              
+  SESEventsEventDestination:
     Type: AWS::SES::ConfigurationSetEventDestination
     Properties:
       ConfigurationSetName: !Ref SESMailConfigurationSet
       EventDestination:
-         Enabled: true
-         MatchingEventTypes:
-           - SEND
-           - REJECT
-           - BOUNCE
-           - COMPLAINT
-           - DELIVERY
-           - OPEN
-           - CLICK
-           - RENDERING_FAILURE
-         Name: "SNSDestination"
-         SnsDestination:
-           TopicARN: !Ref ExistingSNSTopicARN
+        Enabled: true
+        MatchingEventTypes:
+          - SEND
+          - REJECT
+          - BOUNCE
+          - COMPLAINT
+          - DELIVERY
+          - OPEN
+          - CLICK
+          - RENDERING_FAILURE
+          - DELIVERY_DELAY
+          - SUBSCRIPTION
+        SnsDestination:
+          TopicARN: !Ref SESEventsTopic
 
   SESMailReceiptRuleSet:
      Type: AWS::SES::ReceiptRuleSet

@@ -24,9 +24,3 @@ variable "vpc_subnet_ids" {
     description = "List of Subnet IDs within the existing VPC"
     type = list(string)
 }
-
-variable "sns_topic_arn" {
-    description = "ARN of the SNS Topic for SES Notifications"
-    type = string
-    default = ""
-}
